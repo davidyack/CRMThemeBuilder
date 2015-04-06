@@ -1,0 +1,22 @@
+<div>
+<table class="table">
+  <tr ng-repeat='themePack in themePacks'>
+    <td>{{themePack.name}}</td>
+    <td>{{themePack.author}}</td>
+    <td>
+      <!-- Split button -->
+      <div class="btn-group" dropdown>
+        <button type="button" class="btn btn-default" ng-click="preview(themePack)">Preview</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="install(themePack)" href="#">Install</a></li>
+          <li><a ng-click="edit(themePack)" href="#">Edit</a></li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>

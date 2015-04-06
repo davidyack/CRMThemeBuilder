@@ -1,0 +1,22 @@
+<div>
+<table class="table">
+  <tr ng-repeat='currentTheme in currentThemes'>
+    <td>{{currentTheme.name}}</td>
+    <td>
+      <!-- Split button -->
+      <div class="btn-group" dropdown>
+        <button type="button" class="btn btn-default" ng-click="activate(currentTheme)">Activate</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="copy(currentTheme)" href="#">Copy</a></li>
+          <li><a ng-click="edit(currentTheme)" href="#">Edit</a></li>
+          <li><a ng-click="download(currentTheme)" href="#">Download</a></li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
