@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h3 class="modal-title">Theme Pack: {{themePack.name}}</h3>
+</div>
+<div class="modal-body">
+  <h3 ng-if="themePack.PreviewImages === null || themePack.PreviewImages === undefined">There's no preview available</h3>
+  <div ng-if="themePack.PreviewImages.length > 0" style="height: 305px">
+    <carousel interval="3000">
+      <slide ng-repeat="slide in themePack.PreviewImages" active="slide.active">
+        <img ng-src="{{slide.ImageUrl}}" style="margin:auto;">
+        <div class="carousel-caption">
+          <h4>{{slide.Title}}</h4>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

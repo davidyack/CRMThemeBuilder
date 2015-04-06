@@ -1,4 +1,19 @@
-{
+/**
+ * Using Rails-like standard naming convention for endpoints.
+ * GET     /themes              ->  index
+ * POST    /themes              ->  create
+ * GET     /themes/:id          ->  show
+ * PUT     /themes/:id          ->  update
+ * DELETE  /themes/:id          ->  destroy
+ */
+
+'use strict';
+
+var _ = require('lodash');
+
+// Get list of things
+exports.index = function(req, res) {
+  res.json({
    "CurrentThemes":[
       {
          "themeID":"e9615632-8901-4a2e-8648-b1859606c804",
@@ -15,7 +30,7 @@
          "logotooltip":"Microsoft Dynamics CRM",
          "defaultentitycolor":"#001CA5",
          "navbarshelfcolor":"#DFE2E8",
-         "controlshade":"#F3F1F1"        
+         "controlshade":"#F3F1F1"
       },
       {
          "themeID":"ddb88ea9-7793-4aa5-b74d-941eb6bf24a4",
@@ -32,7 +47,7 @@
          "logotooltip":"Microsoft Dynamics CRM",
          "defaultentitycolor":"#001CA5",
          "navbarshelfcolor":"#DFE2E8",
-         "controlshade":"#F3F1F1"         
+         "controlshade":"#F3F1F1"
       }
    ],
    "ThemePacks":[
@@ -55,15 +70,15 @@
          "PreviewImages":[
             {
                "Title":"Image #1",
-               "ImageUrl":"http://someurl.com/image1.jpg"
+               "ImageUrl":"http://placekitten.com/602/300"
             },
             {
-               "Title":"Image #1",
-               "ImageUrl":"http://someurl.com/image1.jpg"
+               "Title":"Image #2",
+               "ImageUrl":"http://placekitten.com/603/300"
             },
             {
-               "Title":"Image #1",
-               "ImageUrl":"http://someurl.com/image1.jpg"
+               "Title":"Image #3",
+               "ImageUrl":"http://placekitten.com/604/300"
             }
          ]
       },
@@ -86,15 +101,15 @@
          "PreviewImages":[
             {
                "Title":"Image #1",
-               "ImageUrl":"http://someurl.com/image1.jpg"
+               "ImageUrl":"http://placekitten.com/602/300"
             },
             {
-               "Title":"Image #1",
-               "ImageUrl":"http://someurl.com/image1.jpg"
+               "Title":"Image #2",
+               "ImageUrl":"http://placekitten.com/603/300"
             },
             {
-               "Title":"Image #1",
-               "ImageUrl":"http://someurl.com/image1.jpg"
+               "Title":"Image #3",
+               "ImageUrl":"http://placekitten.com/604/300"
             }
          ]
       },
@@ -117,4 +132,5 @@
          "PreviewImages":null
       }
    ]
-}
+});
+};
