@@ -2,32 +2,99 @@
   <h3 class="modal-title">Theme</h3>
 </div>
 <div class="modal-body">
-  <div class="panel panel-default">
-    <div class="panel-heading">Theme Name</div>
-    <div class="panel-body">
-      <div class="form-group">
-        <label for="name">Theme Name</label>
-        <input type="text" class="form-control" id="name">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-4" for="name">Theme Name</label>
+      <div class="col-sm-8">
+        <input ng-model="theme.name" type="text" class="form-control" id="name">
       </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Navigation Bar</div>
-    <div class="panel-body">
-      <div class="form-group">
-        <label for="logo">Logo</label>
-        <input type="text" class="form-control" id="logo">
-      </div>
-      <div class="form-group">
-        <label for="logotooltip">Logo tooltip</label>
-        <input type="text" class="form-control" id="logotooltip">
-      </div>
-      <div class="form-group">
-        <label for="navbarcolor">Navigation Bar Color</label>
-        <input colorpicker type="text" class="form-control" id="navbarcolor">
+
+    <h3>Navigation Bar</h3>
+
+    <div class="form-group">
+      <label class="col-sm-4" for="logotooltip">Logo tooltip</label>
+      <div class="col-sm-8">
+        <input ng-model="theme.logotooltip" type="text" class="form-control" id="logotooltip">
       </div>
     </div>
-  </div>
+
+    <div class="form-group">
+      <div class="form-inline">
+        <label class="col-sm-4" for="navbarcolor">Navigation Bar Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker ng-model="theme.navbarbackgroundcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+        <label class="col-sm-4" for="navbarshelfcolor">Navigation Shelf Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker class="pull-right" ng-model="theme.navbarshelfcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-inline">
+        <label class="col-sm-4" for="headercolor">Header Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker ng-model="theme.headercolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+      </div>
+    </div>
+
+    <h3>UI Elements</h3>
+
+    <div class="form-group">
+      <div class="form-inline">
+        <label class="col-sm-4" for="globallinkcolor">Global Link Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker ng-model="theme.globallinkcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+        <label class="col-sm-4" for="selectedlinkeffect">Selected Link Effect</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker class="pull-right" ng-model="theme.selectedlinkeffect" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-inline">
+        <label class="col-sm-4" for="hoverlinkeffect">Hover Link Effect</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker ng-model="theme.hoverlinkeffect" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+        <label class="col-sm-4" for="processcontrolcolor">Process Control Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker class="pull-right" ng-model="theme.processcontrolcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-inline">
+        <label class="col-sm-4" for="defaultentitycolor">Default Entity Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker ng-model="theme.defaultentitycolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+        <label class="col-sm-4" for="defaultcustomentitycolor">Default Custom Entity Color</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker class="pull-right" ng-model="theme.defaultcustomentitycolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-inline">
+        <label class="col-sm-4" for="controlshade">Control Shade</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker ng-model="theme.controlshade" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+        <label class="col-sm-4" for="controlborder">Control Border</label>
+        <div class="col-sm-2">
+          <spectrum-colorpicker class="pull-right" ng-model="theme.controlborder" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="ok()">OK</button>

@@ -11,6 +11,15 @@
 
 var _ = require('lodash');
 
+exports.create = function(req, res) {
+  res.json(req.body);
+};
+
+exports.update = function(req, res) {
+  res.json(req.body);
+};
+
+
 // Get list of things
 exports.index = function(req, res) {
   res.json({
