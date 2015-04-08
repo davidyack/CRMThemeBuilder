@@ -5,8 +5,14 @@ angular.module('app').
     });
 });
 
+angular.module('app').
+  factory('ThemeActionResource', function($resource) {
+    return $resource('/api/themes/:action');
+});
+
+
 angular.module('app')
-  .factory('ThemesActions', function (ThemeResource, flux, _) {
+  .factory('ThemesActions', function (ThemeResource, ThemeActionResource, flux, _) {
     var loaded = false;
     var loading = false;
     return {
@@ -20,12 +26,20 @@ angular.module('app')
           });
         }
       },
+      activate: function(theme) {
+        ThemeActionResource.save({action: 'activate'}, {themeId: theme.themeID}, function() {
+        });
+      },
       add: function(theme) {
         theme.localId = _.uniqueId();
         flux.dispatch('themeAdd', theme);
         ThemeResource.save(theme, function(data) {
           data.localId = theme.localId;
           flux.dispatch('themeAdded', data);
+        });
+      },
+      copy: function(theme) {
+        ThemeActionResource.save({action: 'copy'}, {themeId: theme.themeID}, function() {
         });
       },
       edit: function(theme) {
@@ -88,6 +102,7 @@ angular.module('app')
           $scope.themes = ThemesStore.themes;
         });
         $scope.activate = function(theme) {
+          ThemesActions.activate(theme);
         };
         $scope.edit = function(theme) {
           var modalInstance = $modal.open({
@@ -108,6 +123,7 @@ angular.module('app')
           });
         };
         $scope.copy = function(theme) {
+          ThemesActions.copy(theme);
         };
         $scope.download = function(theme) {
         };

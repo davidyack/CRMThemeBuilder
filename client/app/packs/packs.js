@@ -5,8 +5,13 @@ angular.module('app').
     });
 });
 
+angular.module('app').
+  factory('PackActionResource', function($resource) {
+    return $resource('/api/packs/:action');
+});
+
 angular.module('app')
-  .factory('PacksActions', function(flux, PacksResource) {
+  .factory('PacksActions', function(flux, PackActionResource, PacksResource) {
     var loaded = false;
     var loading = false;
     return {
@@ -19,6 +24,10 @@ angular.module('app')
             loaded = true;
           });
         }
+      },
+      install: function(pack) {
+        PackActionResource.save({action: 'install'}, {themeId: pack.themeID}, function() {
+        });
       },
       edit: function(pack) {
         flux.dispatch('packUpdated', pack);
@@ -68,6 +77,7 @@ angular.module('app')
           $scope.packs = PacksStore.packs;
         });
         $scope.install = function(pack) {
+          PacksActions.install(pack);
         };
         $scope.edit = function(theme) {
           var modalInstance = $modal.open({
