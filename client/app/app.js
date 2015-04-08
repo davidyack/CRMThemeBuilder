@@ -14,11 +14,15 @@ angular.module('app', [
   .run(function ($rootScope) {
      $rootScope._ = window._;
   })
-  .config(function ($urlRouterProvider, $locationProvider) {
+  .config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+    $stateProvider.state('area', {
+      templateUrl: 'app/main.html',
+      url: '/',
+    });
   });
 
 
