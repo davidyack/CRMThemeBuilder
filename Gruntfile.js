@@ -31,7 +31,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
-      dist: 'dist'
+      dist: '.dist'
     },
     express: {
       options: {
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: '<%= yeoman.dist %>/server/app.js'
         }
       }
     },
@@ -60,12 +60,13 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
-          '!<%= yeoman.client %>/app/app.js'],
+          '!<%= yeoman.client %>/app/app1.js'],
         tasks: ['injector:scripts']
       },
       injectCss: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.css'
+          '<%= yeoman.client %>/{app,components}/**/*.css',
+          '!<%= yeoman.client %>/app/app.css'
         ],
         tasks: ['injector:css']
       },
@@ -300,7 +301,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       options: {
         // This should be the name of your apps angular module
-        module: 'crmthemeBuilderApp',
+        module: 'app',
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
@@ -310,7 +311,7 @@ module.exports = function (grunt) {
           removeScriptTypeAttributes: true,
           removeStyleLinkTypeAttributes: true
         },
-        usemin: 'app/app.js'
+        usemin: 'app/crmthemebuilder.js'
       },
       main: {
         cwd: '<%= yeoman.client %>',
@@ -366,6 +367,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.client %>',
         dest: '.tmp/',
         src: ['{app,components}/**/*.css']
+      },
+      release: {
+        expand: true,
+        dest: 'dist',
+        cwd: '<%= yeoman.dist %>/public/app',
+        src: '**/*'
       }
     },
 
@@ -407,8 +414,8 @@ module.exports = function (grunt) {
         }
       },
       dist: [
-        'imagemin',
-        'svgmin'
+        //'imagemin',
+        //'svgmin'
       ]
     },
 
@@ -601,13 +608,14 @@ module.exports = function (grunt) {
     //'cdnify',
     'cssmin',
     'uglify',
-    'rev',
+    //'rev',
     'usemin'
   ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'build'
+    'build',
+    'copy:release'
   ]);
 };
