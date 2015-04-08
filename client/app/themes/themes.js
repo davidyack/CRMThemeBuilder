@@ -12,7 +12,7 @@ angular.module('app').
 
 
 angular.module('app')
-  .factory('ThemesActions', function (ThemeResource, ThemeActionResource, flux, _) {
+  .factory('ThemesActions', function (ThemeResource, ThemeActionResource, flux, _, $window) {
     var loaded = false;
     var loading = false;
     return {
@@ -47,6 +47,22 @@ angular.module('app')
         ThemeResource.update(theme, function(data) {
           flux.dispatch('themeUpdated', data);
         });
+      },
+      download: function(theme) {
+        var data = JSON.stringify(theme);
+        var userAgent = 'navigator' in $window && 'userAgent' in $window.navigator &&
+          $window.navigator.userAgent.toLowerCase() || '';
+        if (/msie/i.test(userAgent) || 'ActiveXObject' in window) {
+          var blob1 = new Blob([data]);
+          $window.navigator.msSaveBlob(blob1, 'theme.json');
+        } else {
+          var element = angular.element('<a/>');
+          element.attr({
+            href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+            target: '_blank',
+            download: 'theme.json'
+          })[0].click();
+        }
       }
     };
   });
@@ -126,6 +142,7 @@ angular.module('app')
           ThemesActions.copy(theme);
         };
         $scope.download = function(theme) {
+          ThemesActions.download(theme);
         };
       }
     };
