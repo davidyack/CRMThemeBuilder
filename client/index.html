@@ -12,20 +12,21 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(client) app/vendor.css -->
+
+    <!-- build:css({.tmp,client}) app/crmthemebuilder.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
       <link rel="stylesheet" href="bower_components/spectrum/spectrum.css" />
       <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-    <link rel="stylesheet" href="app/app.css">
+
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
       <!-- endinjector -->
+
     <!-- endbuild -->
+
   </head>
-  <body ng-app="app">
+  <body ng-app="app" ng-strict-di>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -45,7 +46,8 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <!-- build:js({client,node_modules}) app/vendor.js -->
+
+    <!-- build:js({.tmp,client,node_modules}) app/crmthemebuilder.js -->
       <!-- bower:js -->
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -59,12 +61,11 @@
       <script src="bower_components/spectrum/spectrum.js"></script>
       <script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
       <!-- endbower -->
+
+      <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <!-- endinjector -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,client}) app/app.js -->
-        <script src="app/app.js"></script>
-          <!-- injector:js -->
-          <!-- endinjector -->
-        <!-- endbuild -->
 </body>
 </html>

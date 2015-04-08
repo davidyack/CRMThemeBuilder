@@ -19,18 +19,11 @@ angular.module('app', [
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
-  })
-  .factory('CommonActions', CommonActions)
-  .factory('ThemesActions', ThemesActions)
-  .factory('PacksActions', PacksActions)
-  .store('ThemesStore', ['flux', '_',  ThemesStore])
-  .store('PacksStore', ['flux',  PacksStore])
-  .directive('packs', Packs)
-  .directive('themes', Themes)
-  .directive('navbar', NavBar);
+  });
 
 
-  function CommonActions($http, flux) {
+  angular.module('app')
+    .factory('CommonActions', function CommonActions($http, flux) {
     var loaded = false;
     var loading = false;
     return {
@@ -38,18 +31,19 @@ angular.module('app', [
         if (!loaded && !loading) {
           loading = true;
             $http.get('/api/ThemeBuilder')
-              .success(function(data, status, headers, config) {
+              .success(function(data) {
                 flux.dispatch('packsLoaded', data.ThemePacks);
                 flux.dispatch('themesLoaded', data.CurrentThemes);
                 loading = true;
                 loaded = true;
-              })
+              });
         }
       }
-    }
-  }
+    };
+  });
 
-  function ThemesActions($http, flux, _) {
+  angular.module('app')
+  .factory('ThemesActions', function ($http, flux, _) {
     return {
       add: function(theme) {
         theme.localId = _.uniqueId();
@@ -67,10 +61,11 @@ angular.module('app', [
             flux.dispatch('themeUpdated', data);
           });
       }
-    }
-  }
+    };
+  });
 
-  function ThemesStore(flux,_) {
+  angular.module('app')
+  .store('ThemesStore', ['flux', '_', function(flux,_) {
     var state = flux.immutable({
       themes: [],
     });
@@ -103,10 +98,11 @@ angular.module('app', [
           return state.themes;
         }
       }
-    }
-  };
+    };
+  }]);
 
-  function PacksActions($http, flux) {
+  angular.module('app')
+  .factory('PacksActions', function($http, flux) {
     return {
       edit: function(pack) {
         flux.dispatch('packUpdated', pack);
@@ -116,9 +112,10 @@ angular.module('app', [
           });
       }
     };
-  }
+  });
 
-  function PacksStore(flux, _) {
+  angular.module('app')
+  .store('PacksStore', ['flux', '_', function(flux, _) {
     var state = flux.immutable({
       packs: [],
     });
@@ -139,19 +136,19 @@ angular.module('app', [
           return state.packs;
         }
       }
-    }
-  };
+    };
+  }]);
 
-
-  function NavBar($modal) {
+  angular.module('app')
+  .directive('navbar', function() {
     return {
       scope: {},
       replace: true,
-      templateUrl: '/app/navbar.html',
-      controller: function($scope, ThemesActions) {
+      templateUrl: 'app/navbar.html',
+      controller: function($scope, $modal, ThemesActions) {
         $scope.add = function() {
           var modalInstance = $modal.open({
-            templateUrl: '/app/modal.theme.html',
+            templateUrl: 'app/modal.theme.html',
             controller: function($scope, $modalInstance) {
               $scope.theme = {};
               $scope.ok = function () {
@@ -166,17 +163,18 @@ angular.module('app', [
           modalInstance.result.then(function(theme) {
             ThemesActions.add(theme);
           });
-        }
+        };
       }
     };
-  };
+  });
 
-  function Themes($modal) {
+  angular.module('app')
+  .directive('themes', function() {
     return {
       scope: {},
       replace: true,
-      templateUrl: '/app/themes.html',
-      controller: function($scope, ThemesStore, CommonActions, ThemesActions) {
+      templateUrl: 'app/themes.html',
+      controller: function($scope, $modal, ThemesStore, CommonActions, ThemesActions) {
         CommonActions.loadThemesAndPacks();
 
         $scope.themes = ThemesStore.themes;
@@ -187,7 +185,7 @@ angular.module('app', [
         };
         $scope.edit = function(theme) {
           var modalInstance = $modal.open({
-            templateUrl: '/app/modal.theme.html',
+            templateUrl: 'app/modal.theme.html',
             controller: function($scope, $modalInstance) {
               $scope.theme = theme;
               $scope.ok = function () {
@@ -209,13 +207,14 @@ angular.module('app', [
         };
       }
     };
-  };
+  });
 
-  function Packs() {
+  angular.module('app')
+  .directive('packs', function () {
     return {
       scope: {},
       replace: true,
-      templateUrl: '/app/packs.html',
+      templateUrl: 'app/packs.html',
       controller: function($scope, PacksStore, CommonActions, $modal, PacksActions) {
         CommonActions.loadThemesAndPacks();
 
@@ -227,7 +226,7 @@ angular.module('app', [
         };
         $scope.edit = function(theme) {
           var modalInstance = $modal.open({
-            templateUrl: '/app/modal.theme.html',
+            templateUrl: 'app/modal.theme.html',
             controller: function($scope, $modalInstance) {
               $scope.theme = theme;
               $scope.ok = function () {
@@ -245,7 +244,7 @@ angular.module('app', [
         };
         $scope.preview = function(pack) {
           var modalInstance = $modal.open({
-            templateUrl: '/app/modal.carousel.html',
+            templateUrl: 'app/modal.carousel.html',
             resolve: {
               pack: function () {
                 return pack;
@@ -268,4 +267,4 @@ angular.module('app', [
         };
       }
     };
-  };
+  });
