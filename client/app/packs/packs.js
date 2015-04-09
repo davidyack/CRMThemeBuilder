@@ -1,16 +1,16 @@
-angular.module('app').
+angular.module('themeBuilderApp').
   factory('PacksResource', function($resource) {
     return $resource('/api/packs', null, {
         'update': { method:'PUT' }
     });
 });
 
-angular.module('app').
+angular.module('themeBuilderApp').
   factory('PackActionResource', function($resource) {
     return $resource('/api/packs/:action');
 });
 
-angular.module('app')
+angular.module('themeBuilderApp')
   .factory('PacksActions', function(flux, PackActionResource, PacksResource) {
     var loaded = false;
     var loading = false;
@@ -38,7 +38,7 @@ angular.module('app')
     };
   });
 
-angular.module('app')
+angular.module('themeBuilderApp')
   .store('PacksStore', ['flux', '_', function(flux, _) {
     var state = flux.immutable({
       packs: [],
@@ -63,7 +63,7 @@ angular.module('app')
     };
   }]);
 
-angular.module('app')
+angular.module('themeBuilderApp')
   .directive('packs', function () {
     return {
       scope: {},

@@ -1,17 +1,17 @@
-angular.module('app').
+angular.module('themeBuilderApp').
   factory('ThemeResource', function($resource) {
     return $resource('/api/themes', null, {
         'update': { method:'PUT' }
     });
 });
 
-angular.module('app').
+angular.module('themeBuilderApp').
   factory('ThemeActionResource', function($resource) {
     return $resource('/api/themes/:action');
 });
 
 
-angular.module('app')
+angular.module('themeBuilderApp')
   .factory('ThemesActions', function (ThemeResource, ThemeActionResource, flux, _, $window) {
     var loaded = false;
     var loading = false;
@@ -67,7 +67,7 @@ angular.module('app')
     };
   });
 
-angular.module('app')
+angular.module('themeBuilderApp')
   .store('ThemesStore', ['flux', '_', function(flux,_) {
     var state = flux.immutable({
       themes: [],
@@ -104,7 +104,7 @@ angular.module('app')
     };
   }]);
 
-angular.module('app')
+angular.module('themeBuilderApp')
   .directive('themes', function() {
     return {
       scope: {},
