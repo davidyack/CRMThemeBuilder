@@ -17,7 +17,25 @@
     "crm\"]"
   ],
   "license": "MIT",  
-    
+    "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "api",
+    "app",
+    "Gruntfile.js",
+    "package.json",
+    "server",
+    "README.md",
+    "protractor.conf.js",
+    "karma.conf.js",
+    "e2e",
+    "client",
+    "bower_json",
+    ".bower.sjon"
+  ],
   "devDependencies": {
     "angular": ">=1.2.*",
     "json3": "~3.3.1",
