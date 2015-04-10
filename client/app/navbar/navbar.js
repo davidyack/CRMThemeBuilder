@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('themeBuilderApp')
   .directive('navbar', function(NavbarActions) {
     return {

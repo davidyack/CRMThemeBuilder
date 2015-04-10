@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('themeBuilderApp').
   factory('ThemeResource', function($resource) {
     return $resource('/api/themes', null, {
@@ -19,7 +21,7 @@ angular.module('themeBuilderApp')
       init: function() {
         if (!loaded && !loading) {
           loading = true;
-          var data = ThemeResource.query(function(data) {
+          var data = ThemeResource.query(function() {
             flux.dispatch('themesLoaded', data);
             loading = true;
             loaded = true;
@@ -75,7 +77,7 @@ angular.module('themeBuilderApp')
     return {
       handlers: {
         'themesLoaded': 'onLoaded',
-        'themeUpdated': 'onUpdated',
+        //'themeUpdated': 'onUpdated',
         'themeAdded': 'onAdded',
         'themeAdd': 'add'
       },
@@ -90,8 +92,8 @@ angular.module('themeBuilderApp')
         state = state.themes.concat(themes);
         this.emit('themes.changed');
       },
-      onUpdated: function(theme) {
-      },
+      //onUpdated: function(theme) {
+      //},
       add: function(theme) {
         state = state.themes.concat(theme);
         this.emit('themes.changed');

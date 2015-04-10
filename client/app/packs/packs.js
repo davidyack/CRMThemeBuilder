@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('themeBuilderApp').
   factory('PacksResource', function($resource) {
     return $resource('/api/packs', null, {
@@ -18,7 +20,7 @@ angular.module('themeBuilderApp')
       init: function() {
         if (!loaded && !loading) {
           loading = true;
-          var data = PacksResource.query(function(data) {
+          var data = PacksResource.query(function() {
             flux.dispatch('packsLoaded', data);
             loading = true;
             loaded = true;
@@ -39,16 +41,13 @@ angular.module('themeBuilderApp')
   });
 
 angular.module('themeBuilderApp')
-  .store('PacksStore', ['flux', '_', function(flux, _) {
+  .store('PacksStore', ['flux', function(flux) {
     var state = flux.immutable({
       packs: [],
     });
     return {
       handlers: {
         'packsLoaded': 'onLoad',
-        'packUpdated': 'onUpdate'
-      },
-      onUpdate: function(pack) {
       },
       onLoad: function(packs) {
         state = state.packs.splice(0, state.packs.length);
@@ -117,7 +116,7 @@ angular.module('themeBuilderApp')
               };
             }
           });
-          modalInstance.result.then(function(pack) {
+          modalInstance.result.then(function() {
           });
         };
       }
