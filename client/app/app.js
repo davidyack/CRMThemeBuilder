@@ -15,11 +15,11 @@ angular.module('themeBuilderApp', [
   .run(function ($rootScope) {
      $rootScope._ = window._;
   })
-  .config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
+  .config(function ($urlRouterProvider,  $stateProvider) {
     $urlRouterProvider
       .otherwise('/');
 
-    $locationProvider.html5Mode(true);
+  
     $stateProvider.state('area', {
       templateUrl: 'app/main.html',
       url: '/',
