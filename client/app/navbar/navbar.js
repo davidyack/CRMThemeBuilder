@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('themeBuilderApp')
   .directive('navbar', function(NavbarActions) {
     return {
@@ -31,14 +33,14 @@ angular.module('themeBuilderApp')
   });
 
 angular.module('themeBuilderApp')
-  .factory('NavbarActions', function($upload) {
+  .factory('NavbarActions', function($upload, $window) {
     return {
       upload: function(files) {
         if (files && files.length) {
           for (var i = 0; i < files.length; i++) {
             var file = files[i];
             $upload.upload({
-              url: 'api/themes/upload',
+              url: $window.ThemeBuilderThemesUploadURL || 'api/themes/upload',
               file: file
             });
           }

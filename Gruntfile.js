@@ -613,10 +613,14 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
+  grunt.registerTask('dist', 'release packages', [
+    'build',
+    'copy:release'
+  ]);
+
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'build',
-    'copy:release'
+    'build'
   ]);
 };

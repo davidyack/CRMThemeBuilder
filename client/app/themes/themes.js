@@ -1,25 +1,20 @@
-angular.module('themeBuilderApp').
-  factory('ThemeResource', function($resource) {
-    return $resource('/api/themes', null, {
-        'update': { method:'PUT' }
-    });
-});
-
-angular.module('themeBuilderApp').
-  factory('ThemeActionResource', function($resource) {
-    return $resource('/api/themes/:action');
-});
-
+'use strict';
 
 angular.module('themeBuilderApp')
-  .factory('ThemesActions', function (ThemeResource, ThemeActionResource, flux, _, $window) {
+  .factory('ThemesActions', function ( flux, _, $window, $resource) {
     var loaded = false;
     var loading = false;
+    var ThemeResource = $resource($window.ThemeBuilderThemesURL || '/api/themes', null, {
+        'update': { method:'PUT' }
+    });
+    var ThemeActivateResource = $resource($window.ThemeBuilderThemeActivateURL || '/api/themes/activate');
+    var ThemeCopyResource = $resource($window.ThemeBuilderThemeCopyURL || '/api/themes/copy');
+
     return {
       init: function() {
         if (!loaded && !loading) {
           loading = true;
-          var data = ThemeResource.query(function(data) {
+          var data = ThemeResource.query(function() {
             flux.dispatch('themesLoaded', data);
             loading = true;
             loaded = true;
@@ -27,7 +22,7 @@ angular.module('themeBuilderApp')
         }
       },
       activate: function(theme) {
-        ThemeActionResource.save({action: 'activate'}, {themeId: theme.themeID}, function() {
+        ThemeActivateResource.save({themeId: theme.themeID}, function() {
         });
       },
       add: function(theme) {
@@ -39,7 +34,7 @@ angular.module('themeBuilderApp')
         });
       },
       copy: function(theme) {
-        ThemeActionResource.save({action: 'copy'}, {themeId: theme.themeID}, function() {
+        ThemeCopyResource.save({themeId: theme.themeID}, function() {
         });
       },
       edit: function(theme) {
@@ -75,7 +70,7 @@ angular.module('themeBuilderApp')
     return {
       handlers: {
         'themesLoaded': 'onLoaded',
-        'themeUpdated': 'onUpdated',
+        //'themeUpdated': 'onUpdated',
         'themeAdded': 'onAdded',
         'themeAdd': 'add'
       },
@@ -90,8 +85,8 @@ angular.module('themeBuilderApp')
         state = state.themes.concat(themes);
         this.emit('themes.changed');
       },
-      onUpdated: function(theme) {
-      },
+      //onUpdated: function(theme) {
+      //},
       add: function(theme) {
         state = state.themes.concat(theme);
         this.emit('themes.changed');

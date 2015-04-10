@@ -1,24 +1,19 @@
-angular.module('themeBuilderApp').
-  factory('PacksResource', function($resource) {
-    return $resource('/api/packs', null, {
-        'update': { method:'PUT' }
-    });
-});
+'use strict';
 
-angular.module('themeBuilderApp').
-  factory('PackActionResource', function($resource) {
-    return $resource('/api/packs/:action');
-});
 
 angular.module('themeBuilderApp')
-  .factory('PacksActions', function(flux, PackActionResource, PacksResource) {
+  .factory('PacksActions', function(flux, $resource, $window) {
     var loaded = false;
     var loading = false;
+    var PacksResource = $resource($window.ThemeBuilderPacksURL || '/api/packs', null, {
+        'update': { method:'PUT' }
+    });
+    var PackInstallResource = $resource($window.ThemeBuilderPackInstallURL || '/api/packs/install');
     return {
       init: function() {
         if (!loaded && !loading) {
           loading = true;
-          var data = PacksResource.query(function(data) {
+          var data = PacksResource.query(function() {
             flux.dispatch('packsLoaded', data);
             loading = true;
             loaded = true;
@@ -26,7 +21,7 @@ angular.module('themeBuilderApp')
         }
       },
       install: function(pack) {
-        PackActionResource.save({action: 'install'}, {themeId: pack.themeID}, function() {
+        PackInstallResource.save({themeId: pack.themeID}, function() {
         });
       },
       edit: function(pack) {
@@ -39,16 +34,13 @@ angular.module('themeBuilderApp')
   });
 
 angular.module('themeBuilderApp')
-  .store('PacksStore', ['flux', '_', function(flux, _) {
+  .store('PacksStore', ['flux', function(flux) {
     var state = flux.immutable({
       packs: [],
     });
     return {
       handlers: {
         'packsLoaded': 'onLoad',
-        'packUpdated': 'onUpdate'
-      },
-      onUpdate: function(pack) {
       },
       onLoad: function(packs) {
         state = state.packs.splice(0, state.packs.length);
@@ -117,7 +109,7 @@ angular.module('themeBuilderApp')
               };
             }
           });
-          modalInstance.result.then(function(pack) {
+          modalInstance.result.then(function() {
           });
         };
       }
