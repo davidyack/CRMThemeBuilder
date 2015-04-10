@@ -1,21 +1,14 @@
 'use strict';
 
-angular.module('themeBuilderApp').
-  factory('PacksResource', function($resource) {
-    return $resource('/api/packs', null, {
-        'update': { method:'PUT' }
-    });
-});
-
-angular.module('themeBuilderApp').
-  factory('PackActionResource', function($resource) {
-    return $resource('/api/packs/:action');
-});
 
 angular.module('themeBuilderApp')
-  .factory('PacksActions', function(flux, PackActionResource, PacksResource) {
+  .factory('PacksActions', function(flux, $resource, $window) {
     var loaded = false;
     var loading = false;
+    var PacksResource = $resource($window.ThemeBuilderPacksURL || '/api/packs', null, {
+        'update': { method:'PUT' }
+    });
+    var PackInstallResource = $resource($window.ThemeBuilderPackInstallURL || '/api/packs/install');
     return {
       init: function() {
         if (!loaded && !loading) {
@@ -28,7 +21,7 @@ angular.module('themeBuilderApp')
         }
       },
       install: function(pack) {
-        PackActionResource.save({action: 'install'}, {themeId: pack.themeID}, function() {
+        PackInstallResource.save({themeId: pack.themeID}, function() {
         });
       },
       edit: function(pack) {

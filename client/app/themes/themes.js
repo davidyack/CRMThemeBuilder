@@ -1,22 +1,15 @@
 'use strict';
 
-angular.module('themeBuilderApp').
-  factory('ThemeResource', function($resource) {
-    return $resource('/api/themes', null, {
-        'update': { method:'PUT' }
-    });
-});
-
-angular.module('themeBuilderApp').
-  factory('ThemeActionResource', function($resource) {
-    return $resource('/api/themes/:action');
-});
-
-
 angular.module('themeBuilderApp')
-  .factory('ThemesActions', function (ThemeResource, ThemeActionResource, flux, _, $window) {
+  .factory('ThemesActions', function ( flux, _, $window, $resource) {
     var loaded = false;
     var loading = false;
+    var ThemeResource = $resource($window.ThemeBuilderThemesURL || '/api/themes', null, {
+        'update': { method:'PUT' }
+    });
+    var ThemeActivateResource = $resource($window.ThemeBuilderThemeActivateURL || '/api/themes/activate');
+    var ThemeCopyResource = $resource($window.ThemeBuilderThemeCopyURL || '/api/themes/copy');
+
     return {
       init: function() {
         if (!loaded && !loading) {
@@ -29,7 +22,7 @@ angular.module('themeBuilderApp')
         }
       },
       activate: function(theme) {
-        ThemeActionResource.save({action: 'activate'}, {themeId: theme.themeID}, function() {
+        ThemeActivateResource.save({themeId: theme.themeID}, function() {
         });
       },
       add: function(theme) {
@@ -41,7 +34,7 @@ angular.module('themeBuilderApp')
         });
       },
       copy: function(theme) {
-        ThemeActionResource.save({action: 'copy'}, {themeId: theme.themeID}, function() {
+        ThemeCopyResource.save({themeId: theme.themeID}, function() {
         });
       },
       edit: function(theme) {
