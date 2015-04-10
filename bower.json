@@ -18,7 +18,6 @@
   ],
   "license": "MIT",  
     
-  
   "devDependencies": {
     "angular": ">=1.2.*",
     "json3": "~3.3.1",
