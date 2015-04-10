@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', [
+angular.module('themeBuilderApp', [
   //'ngCookies',
   'ngResource',
   //'ngSanitize',
@@ -8,7 +8,8 @@ angular.module('app', [
   'ui.bootstrap',
   'flux',
   'colorpicker.module',
-  'angularSpectrumColorpicker'
+  'angularSpectrumColorpicker',
+  'angularFileUpload'
 ])
   .constant('_', window._)
   .run(function ($rootScope) {
