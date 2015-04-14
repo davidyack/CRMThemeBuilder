@@ -3,6 +3,9 @@
   <tr ng-repeat='theme in themes'>
     <td>{{theme.name}}</td>
     <td>
+      <span ng-if="theme.currenttheme">current</span>
+    </td>
+    <td>
       <!-- Split button -->
       <div class="btn-group pull-right" dropdown>
         <button type="button" class="btn btn-default" ng-click="activate(theme)">Activate</button>

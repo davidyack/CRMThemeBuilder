@@ -39,7 +39,8 @@ exports.index = function(req, res) {
          "defaultentitycolor":"#001CA5",
          "navbarshelfcolor":"#DFE2E8",
          "controlshade":"#F3F1F1",
-         "readonly": true
+         "readonly": true,
+         "currenttheme": true
       },
       {
          "themeID":"ddb88ea9-7793-4aa5-b74d-941eb6bf24a4",
