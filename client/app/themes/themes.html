@@ -1,26 +1,27 @@
 <div>
-<table class="table">
-  <tr ng-repeat='theme in themes'>
-    <td>{{theme.name}}</td>
-    <td>
-      <span ng-if="theme.currenttheme">current</span>
-    </td>
-    <td>
-      <!-- Split button -->
-      <div class="btn-group pull-right" dropdown>
-        <button type="button" class="btn btn-default" ng-click="activate(theme)">Activate</button>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a ng-click="copy(theme)" href="#">Copy</a></li>
-          <li ng-if="!theme.readonly"><a ng-click="edit(theme)" href="#">Edit</a></li>
-          <li><a ng-click="download(theme)" href="#">Download</a></li>
-          <li ng-if="!theme.readonly"><a ng-click="remove(theme)" href="#">Delete</a></li>
-        </ul>
-      </div>
-    </td>
-  </tr>
-</table>
+  <h2>Current themes</h2>
+  <table class="table">
+    <tr ng-repeat='theme in themes'>
+      <td>{{theme.name}}</td>
+      <td>
+        <span ng-if="theme.currenttheme">current</span>
+      </td>
+      <td>
+        <!-- Split button -->
+        <div class="btn-group pull-right" dropdown>
+          <button type="button" class="btn btn-default" ng-click="activate(theme)">Activate</button>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="copy(theme)" href="#">Copy</a></li>
+            <li ng-if="!theme.readonly"><a ng-click="edit(theme)" href="#">Edit</a></li>
+            <li><a ng-click="download(theme)" href="#">Download</a></li>
+            <li ng-if="!theme.readonly"><a ng-click="remove(theme)" href="#">Delete</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>

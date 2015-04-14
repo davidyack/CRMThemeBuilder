@@ -1,22 +1,23 @@
 <div>
-<table class="table">
-  <tr ng-repeat='pack in packs'>
-    <td>{{pack.name}}</td>
-    <td>{{pack.author}}</td>
-    <td>
-      <!-- Split button -->
-      <div class="btn-group pull-right" dropdown>
-        <button type="button" class="btn btn-default" ng-click="preview(pack)">Preview</button>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a ng-click="install(pack)" href="#">Install</a></li>
-          <li><a ng-click="edit(pack)" href="#">Edit then install</a></li>
-        </ul>
-      </div>
-    </td>
-  </tr>
-</table>
+  <h2>Theme packs</h2>
+  <table class="table">
+    <tr ng-repeat='pack in packs'>
+      <td>{{pack.name}}</td>
+      <td>{{pack.author}}</td>
+      <td>
+        <!-- Split button -->
+        <div class="btn-group pull-right" dropdown>
+          <button type="button" class="btn btn-default" ng-click="preview(pack)">Preview</button>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="install(pack)" href="#">Install</a></li>
+            <li><a ng-click="edit(pack)" href="#">Edit then install</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
