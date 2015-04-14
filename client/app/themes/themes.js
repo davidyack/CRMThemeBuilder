@@ -3,6 +3,7 @@
 angular.module('themeBuilderApp')
   .factory('ThemesActions', function ( flux, _, $window, $resource) {
     var ThemeResource = $resource($window.ThemeBuilderThemesURL || '/api/themes', null, {
+        'delete': { method:'DELETE' },
         'update': { method:'PUT' }
     });
     var ThemeActivateResource = $resource($window.ThemeBuilderThemeActivateURL || '/api/themes/activate');
@@ -25,6 +26,12 @@ angular.module('themeBuilderApp')
         ThemeResource.save(theme, function(data) {
           data.localId = theme.localId;
           flux.dispatch('themeAdded', data);
+        });
+      },
+      remove: function(theme) {
+        var self = this;
+        ThemeResource.remove({themeId: theme.themeID}, function() {
+          self.load();
         });
       },
       copy: function(theme) {
@@ -142,6 +149,9 @@ angular.module('themeBuilderApp')
           modalInstance.result.then(function(theme) {
             ThemesActions.edit(theme);
           });
+        };
+        $scope.remove= function(theme) {
+          ThemesActions.remove(theme);
         };
         $scope.copy = function(theme) {
           ThemesActions.copy(theme);
