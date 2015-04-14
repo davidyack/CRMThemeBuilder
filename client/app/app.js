@@ -8,8 +8,7 @@ angular.module('themeBuilderApp', [
   'ui.bootstrap',
   'flux',
   'colorpicker.module',
-  'angularSpectrumColorpicker',
-  'angularFileUpload'
+  'angularSpectrumColorpicker'
 ])
   .constant('_', window._)
   .run(function ($rootScope) {
@@ -19,7 +18,6 @@ angular.module('themeBuilderApp', [
     $urlRouterProvider
       .otherwise('/');
 
-  
     $stateProvider.state('area', {
       templateUrl: 'app/main.html',
       url: '/',

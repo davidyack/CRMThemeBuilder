@@ -2,7 +2,7 @@
 
 
 angular.module('themeBuilderApp')
-  .factory('PacksActions', function(flux, $resource, $window) {
+  .factory('PacksActions', function(flux, $resource, $window, AlertsActions) {
     var loaded = false;
     var loading = false;
     var PacksResource = $resource($window.ThemeBuilderPacksURL || '/api/packs', null, {
@@ -22,6 +22,7 @@ angular.module('themeBuilderApp')
       },
       install: function(pack) {
         PackInstallResource.save({themeId: pack.themeID}, function() {
+          AlertsActions.add({type: 'success', msg: 'Theme successfully installed', timeout: 3000});
         });
       },
       edit: function(pack) {

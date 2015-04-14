@@ -10,15 +10,15 @@
 'use strict';
 
 var _ = require('lodash');
-
-exports.create = function(req, res) {
+var dummy = function(req, res) {
   res.json(req.body);
 };
 
-exports.update = function(req, res) {
-  res.json(req.body);
-};
 
+
+exports.create = dummy;
+exports.update = dummy;
+exports.delete = dummy;
 
 // Get list of things
 exports.index = function(req, res) {
@@ -38,7 +38,9 @@ exports.index = function(req, res) {
          "logotooltip":"Microsoft Dynamics CRM",
          "defaultentitycolor":"#001CA5",
          "navbarshelfcolor":"#DFE2E8",
-         "controlshade":"#F3F1F1"
+         "controlshade":"#F3F1F1",
+         "readonly": true,
+         "currenttheme": true
       },
       {
          "themeID":"ddb88ea9-7793-4aa5-b74d-941eb6bf24a4",
