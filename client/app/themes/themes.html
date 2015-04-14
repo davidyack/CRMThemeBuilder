@@ -12,9 +12,9 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a ng-click="copy(theme)" href="#">Copy</a></li>
-          <li><a ng-click="edit(theme)" href="#">Edit</a></li>
+          <li ng-if="!theme.readonly"><a ng-click="edit(theme)" href="#">Edit</a></li>
           <li><a ng-click="download(theme)" href="#">Download</a></li>
-          <li><a ng-click="remove(theme)" href="#">Delete</a></li>
+          <li ng-if="!theme.readonly"><a ng-click="remove(theme)" href="#">Delete</a></li>
         </ul>
       </div>
     </td>
