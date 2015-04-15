@@ -39,7 +39,7 @@ exports.index = function(req, res) {
          "defaultentitycolor":"#001CA5",
          "navbarshelfcolor":"#DFE2E8",
          "controlshade":"#F3F1F1",
-         "readonly": true,
+         "updatable": false,
          "currenttheme": true
       },
       {
@@ -57,7 +57,8 @@ exports.index = function(req, res) {
          "logotooltip":"Microsoft Dynamics CRM",
          "defaultentitycolor":"#001CA5",
          "navbarshelfcolor":"#DFE2E8",
-         "controlshade":"#F3F1F1"
+         "controlshade":"#F3F1F1",
+         "updatable": true
       }
    ]);
 };
