@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('themeBuilderApp')
-  .factory('ThemesActions', function ( flux, _, $window, $resource) {
+  .factory('ThemesActions', function ( flux, _, $window, $resource, AlertsActions) {
     var ThemeResource = $resource($window.ThemeBuilderThemesURL || '/api/themes', null, {
         'delete': { method:'DELETE' },
         'update': { method:'PUT' }
@@ -32,6 +32,7 @@ angular.module('themeBuilderApp')
         var self = this;
         ThemeResource.remove({themeId: theme.themeID}, function() {
           self.load();
+          AlertsActions.add({type: 'success', msg: 'Theme deleted', timeout: 3000});
         });
       },
       copy: function(theme) {
