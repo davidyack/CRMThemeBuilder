@@ -17,7 +17,10 @@ angular.module('themeBuilderApp')
         });
       },
       activate: function(theme) {
+        var self = this;
         ThemeActivateResource.save({themeId: theme.themeID}, function() {
+          self.load();
+          AlertsActions.add({type: 'success', msg: 'Theme activated', timeout: 3000});
         });
       },
       add: function(theme) {
