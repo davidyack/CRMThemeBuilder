@@ -22,12 +22,13 @@ angular.module('themeBuilderApp')
       },
       install: function(pack) {
         PackInstallResource.save({themeId: pack.themeID}, function() {
-          AlertsActions.add({type: 'success', msg: 'Theme successfully installed', timeout: 3000});
+          AlertsActions.add({type: 'success', msg: 'Theme installed', timeout: 3000});
         });
       },
       edit: function(pack) {
         flux.dispatch('packUpdated', pack);
         PacksResource.update(pack, function(data) {
+          AlertsActions.add({type: 'success', msg: 'Theme installed', timeout: 3000});
           flux.dispatch('packUpdated', data);
         });
       }
