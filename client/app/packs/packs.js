@@ -72,11 +72,12 @@ angular.module('themeBuilderApp')
         $scope.install = function(pack) {
           PacksActions.install(pack);
         };
+        // 'edit then install'
         $scope.edit = function(theme) {
           var modalInstance = $modal.open({
             templateUrl: 'app/modal.theme.html',
             controller: function($scope, $modalInstance) {
-              $scope.theme = theme;
+              $scope.theme = angular.extend({}, theme);
               $scope.ok = function () {
                 $modalInstance.close($scope.theme);
               };
