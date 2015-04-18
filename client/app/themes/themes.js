@@ -39,6 +39,7 @@ angular.module('themeBuilderApp')
         var self = this;
         ThemeCopyResource.save({themeId: theme.themeID}, function() {
           self.load();
+          AlertsActions.add({type: 'success', msg: 'Theme copied', timeout: 3000});
         });
       },
       edit: function(theme) {
