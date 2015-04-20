@@ -11,8 +11,10 @@ router.put('/', controller.update);
 router.delete('/', controller.delete);
 
 
-router.post('/copy', function(req, res) {
+var dummy = function(req, res) {
   res.json(req.body);
-});
+};
+router.post('/copy', dummy);
+router.post('/activate', dummy);
 
 module.exports = router;

@@ -25,10 +25,14 @@
         <div class="col-sm-2">
           <spectrum-colorpicker ng-model="theme.navbarbackgroundcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
+        <!-- ok with white -->
         <label class="col-sm-4" for="navbarshelfcolor">Navigation Shelf Color</label>
         <div class="col-sm-2">
           <spectrum-colorpicker class="pull-right" ng-model="theme.navbarshelfcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
+        <p class="error-msg col-sm-6"><span ng-show="theme.navbarbackgroundcolor === '#ffffff'">Shouldn't be white</span></p>
       </div>
     </div>
 
@@ -38,6 +42,7 @@
         <div class="col-sm-2">
           <spectrum-colorpicker ng-model="theme.headercolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+        <p class="error-msg col-sm-12"><span ng-show="theme.headercolor === '#ffffff'">Shouldn't be white</span></p>
       </div>
     </div>
 
@@ -49,10 +54,14 @@
         <div class="col-sm-2">
           <spectrum-colorpicker ng-model="theme.globallinkcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
         <label class="col-sm-4" for="selectedlinkeffect">Selected Link Effect</label>
         <div class="col-sm-2">
           <spectrum-colorpicker class="pull-right" ng-model="theme.selectedlinkeffect" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
+        <p class="error-msg col-sm-6"><span ng-show="theme.globallinkcolor === '#ffffff'">Shouldn't be white</span></p>
+        <p class="error-msg col-sm-6"><span ng-show="theme.selectedlinkeffect === '#ffffff'" >Shouldn't be white</span></p>
       </div>
     </div>
 
@@ -62,10 +71,14 @@
         <div class="col-sm-2">
           <spectrum-colorpicker ng-model="theme.hoverlinkeffect" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
         <label class="col-sm-4" for="processcontrolcolor">Process Control Color</label>
         <div class="col-sm-2">
           <spectrum-colorpicker class="pull-right" ng-model="theme.processcontrolcolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
+        <p class="error-msg col-sm-6"><span ng-show="theme.hoverlinkeffect === '#ffffff'">Shouldn't be white</span></p>
+        <p class="error-msg col-sm-6"><span ng-show="theme.processcontrolcolor === '#ffffff'" >Shouldn't be white</span></p>
       </div>
     </div>
 
@@ -75,19 +88,25 @@
         <div class="col-sm-2">
           <spectrum-colorpicker ng-model="theme.defaultentitycolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
         <label class="col-sm-4" for="defaultcustomentitycolor">Default Custom Entity Color</label>
         <div class="col-sm-2">
           <spectrum-colorpicker class="pull-right" ng-model="theme.defaultcustomentitycolor" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+
+        <p class="error-msg col-sm-6"><span ng-show="theme.defaultentitycolor === '#ffffff'">Shouldn't be white</span></p>
+        <p class="error-msg col-sm-6"><span ng-show="theme.defaultcustomentitycolor === '#ffffff'" >Shouldn't be white</span></p>
       </div>
     </div>
 
     <div class="form-group">
       <div class="form-inline">
+        <!-- ok with white -->
         <label class="col-sm-4" for="controlshade">Control Shade</label>
         <div class="col-sm-2">
           <spectrum-colorpicker ng-model="theme.controlshade" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
         </div>
+        <!-- ok with white -->
         <label class="col-sm-4" for="controlborder">Control Border</label>
         <div class="col-sm-2">
           <spectrum-colorpicker class="pull-right" ng-model="theme.controlborder" options="{showInput: true, showInitial: true, allowEmpty: true, preferredFormat: 'hex'}"></spectrum-colorpicker>
@@ -97,6 +116,15 @@
   </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-primary"
+      ng-disabled="theme.defaultcustomentitycolor === '#ffffff' ||
+        theme.defaultentitycolor === '#ffffff' ||
+        theme.hoverlinkeffect === '#ffffff' ||
+        theme.processcontrolcolor === '#ffffff' ||
+        theme.globallinkcolor === '#ffffff' ||
+        theme.selectedlinkeffect === '#ffffff' ||
+        theme.headercolor === '#ffffff' ||
+        theme.navbarbackgroundcolor === '#ffffff'"
+      ng-click="ok()">OK</button>
     <button class="btn btn-default" ng-click="cancel()">Cancel</button>
 </div>

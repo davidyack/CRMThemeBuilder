@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('themeBuilderApp')
-  .factory('ThemesActions', function ( flux, _, $window, $resource) {
+  .factory('ThemesActions', function ( flux, _, $window, $resource, AlertsActions) {
     var ThemeResource = $resource($window.ThemeBuilderThemesURL || '/api/themes', null, {
         'delete': { method:'DELETE' },
         'update': { method:'PUT' }
@@ -17,7 +17,10 @@ angular.module('themeBuilderApp')
         });
       },
       activate: function(theme) {
+        var self = this;
         ThemeActivateResource.save({themeId: theme.themeID}, function() {
+          self.load();
+          AlertsActions.add({type: 'success', msg: 'Theme activated', timeout: 3000});
         });
       },
       add: function(theme) {
@@ -32,12 +35,14 @@ angular.module('themeBuilderApp')
         var self = this;
         ThemeResource.remove({themeId: theme.themeID}, function() {
           self.load();
+          AlertsActions.add({type: 'success', msg: 'Theme deleted', timeout: 3000});
         });
       },
       copy: function(theme) {
         var self = this;
         ThemeCopyResource.save({themeId: theme.themeID}, function() {
           self.load();
+          AlertsActions.add({type: 'success', msg: 'Theme copied', timeout: 3000});
         });
       },
       edit: function(theme) {

@@ -22,12 +22,13 @@ angular.module('themeBuilderApp')
       },
       install: function(pack) {
         PackInstallResource.save({themeId: pack.themeID}, function() {
-          AlertsActions.add({type: 'success', msg: 'Theme successfully installed', timeout: 3000});
+          AlertsActions.add({type: 'success', msg: 'Theme installed', timeout: 3000});
         });
       },
       edit: function(pack) {
         flux.dispatch('packUpdated', pack);
         PacksResource.update(pack, function(data) {
+          AlertsActions.add({type: 'success', msg: 'Theme installed', timeout: 3000});
           flux.dispatch('packUpdated', data);
         });
       }
@@ -72,11 +73,12 @@ angular.module('themeBuilderApp')
         $scope.install = function(pack) {
           PacksActions.install(pack);
         };
+        // 'edit then install'
         $scope.edit = function(theme) {
           var modalInstance = $modal.open({
             templateUrl: 'app/modal.theme.html',
             controller: function($scope, $modalInstance) {
-              $scope.theme = theme;
+              $scope.theme = angular.extend({}, theme);
               $scope.ok = function () {
                 $modalInstance.close($scope.theme);
               };
